@@ -9,54 +9,46 @@
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <link rel="stylesheet" href='/public/css/viewjam.css'/>
+    <script src="/public/js/viewjam.js"></script>
   </head>
   <body>
-    <div class="container"></div>
-		<h1> Jam View</h1>
-      <div class="row">
-      	<div class="col-sm-6">
-				Title:
-      	</div>
-      	<div class="col-sm-6">
-				Jam Title Here      	
-      	</div>
-     <dl class="dl-horizontal">
-      	<dt>Instruments:</dt>
-		
-		<class="h5">	
-		<h5>Saxophone
-        <span class="btn-group">
-            <button class="btn btn-primary btn-sm">Join</button>
-        </span>
-		</h5> 
-		<h5>Trumpet
-        <span class="btn-group">
-            <button class="btn btn-primary btn-sm">Join</button>
-        </span>
-		</h5> 
-		<h5>Drums
-        <span class="btn-group">
-            <button class="btn btn-primary btn-sm">Join</button>
-        </span>
-		</h5> 
-		<h5>Sitar
-        <span class="btn-group">
-            <button class="btn btn-primary btn-sm">Join</button>
-        </span>
-		</h5>
-      </dl>
-     <dl class="dl-horizontal">
-      	<dt>Date/time:</dt>
-	<dd>4/20, 4:20pm/am</dd>
-     </dl>
-     <dl class="dl-horizontal">
-      	<dt>Location:</dt>
-	<dd>Djibouti Court House, Djibouti, 12345</dd>
-     </dl>
-     <dl class="dl-horizontal">
-      	<dt>comments:</dt>
-	<dd>stuff and things and stuff and things and stuff and things and things and stuff</dd>
-     </dl>
+    <div class="container">
+      <div class="title-container row">
+        <div class="title-heading col-xs-6">Title:</div>
+        <div class="title col-xs-6"></div>
+      </div>
+      <div class="jam-spot-container">
+        <!--
+        <div class="jam-spot row">
+          <div class="col-xs-6">Violin</div>
+          <div class="col-xs-6"> <button class="btn btn-primary btn-sm">Join</button></div>
+        </div>
+        <div class="jam-spot row">
+          <div class="col-xs-6">Violin</div>
+          <div class="col-xs-6"> <button class="btn btn-primary btn-sm">Join</button></div>
+        </div>
+        -->
+      </div>
+      <div>
+        <div class="row">
+          <div class="col-xs-12">
+            <span class="title-heading">Date/Time:</span>
+            <span class="datetime-value">4:20 April 20th, 420 AD</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <span class="title-heading">Location:</span>
+            <span class="location-value">Kingston, Jamaica</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="title-heading">Comments:</div>
+            <p class="description-value">stuff and things and stuff and things and stuff and things and things and stuff</p>
+          </div>
+        </div>
+      </div>
     </div>
   </body>
 </html>

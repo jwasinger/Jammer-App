@@ -11,6 +11,7 @@ var jam_schema = mongoose.Schema({
   Title: String,
   Date: Date,
   Description: String,
+  Location: String,
   Spots: Array,
   Creator: String,
   Comments: String

@@ -86,7 +86,8 @@ router.post("/jams", function(req, res) {
     Description: args.Description,
     Spots: args.Spots,
     Creator: args.Creator,
-    Comments: args.Comments});
+    Comments: args.Comments,
+    Location: args.Location});
 
   jam.save(function(err) {
     if(err) {
@@ -117,6 +118,26 @@ router.get("/jams", function(req, res) {
       var data = {data: docs};
       res.json(data);
     });
+  }
+});
+
+router.post("/jams/join", function(req, res) {
+  if(req.query.title && req.query.instrument && req.query.username) {
+    Jam.find({Title: req.query.title}, function(err, docs) {
+      if(err) {
+        console.log(err);
+        return;
+      }
+
+      var jam = docs[0];
+      for(var i = 0; i < jam.Spots; i++) {
+        if(jam.Spots[i].Instrument == req.query.instrument) {
+          if(jam.Spots[i].User == "") {
+
+          }
+        }
+      }
+    })
   }
 });
 

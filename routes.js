@@ -29,10 +29,6 @@ router.get('/startjam', function(req, res) {
   res.render('startjam.html');
 });
 
-router.get('/viewjam', function(req, res) {
-  res.render('viewjam.html');
-});
-
 router.get('/signup', function(req, res) {
   res.render('signup.html');
 });
@@ -101,6 +97,14 @@ router.post('/login', function(req, res)
   .catch(function(exception) {
     console.log(exception);
   });
+});
+
+router.get("/viewjam", function(req, res) {
+  if(!req.query.title) {
+    res.status(404).send();
+  }
+  
+  res.render("viewjam.html");
 });
 
 module.exports = router;

@@ -24,7 +24,7 @@ $(function() {
     };
 
     $.post("/api/jams", jam_data, function(response) {
-      console.log("success");
+      window.location = "/";
     }, "json");
   });
 });
