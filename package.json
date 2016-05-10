@@ -1,5 +1,5 @@
 {
-  "name": "device-management",
+  "name": "Jammer-App",
   "version": "0.0.0",
   "description": "",
   "main": "main.js",
@@ -11,6 +11,11 @@
   "dependencies": {
     "express": "~4.13.4",
     "path": "~0.12.7",
-    "nunjucks": "~2.4.1"
+    "nunjucks": "~2.4.1",
+    "q": "~1.4.1",
+    "express-session": "~1.13.0",
+    "mongoose": "~4.4.16",
+    "connect-mongo": "~1.1.0",
+    "body-parser": "~1.15.1"
   }
 }
