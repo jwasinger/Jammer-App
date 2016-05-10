@@ -8,9 +8,12 @@ var user_schema = mongoose.Schema({
 });
 
 var jam_schema = mongoose.Schema({
+  Title: String,
+  Date: Date,
   Description: String,
   Spots: Array,
-  Creator: String
+  Creator: String,
+  Comments: String
 });
 
 module.exports = {

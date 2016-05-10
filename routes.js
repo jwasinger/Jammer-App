@@ -25,6 +25,14 @@ router.get('/', auth_middleware, function(req, res) {
 
 router.use('/api', api_routes);
 
+router.get('/startjam', function(req, res) {
+  res.render('startjam.html');
+});
+
+router.get('/viewjam', function(req, res) {
+  res.render('viewjam.html');
+});
+
 router.get('/signup', function(req, res) {
   res.render('signup.html');
 });
