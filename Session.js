@@ -5,13 +5,13 @@ var Q = require('q');
 
 var mem_store = null;
 
-module.exports.CreateMemStore = function(express_app)
+module.exports.CreateMemStore = function(router)
 {
   mem_store = new MongoStore({
     mongooseConnection: mongoose.connection
   });
 
-  express_app.use(session({
+  router.use(session({
     resave: true,
     store: mem_store,
     maxAge: null, 

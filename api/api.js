@@ -9,7 +9,7 @@ router.use(bodyParser.urlencoded({ extended: true }));
 
 //router.get("/
 
-//Jam- Descr(text), Spots ({ instrument: text, skill_level: text, user:}, type JamSpot), Creator(type User)
+//;am- Descr(text), Spots ({ instrument: text, skill_level: text, user:}, type JamSpot), Creator(type User)
 //User- Username, Password
 //
 
@@ -18,27 +18,27 @@ router.get("/users", function(req, res) {
 });
 
 router.post("/users", function(req, res) {
-  debugger;
   //create the account and log the user in
   var user = new User({ username: req.body.username, password: req.body.password, user_type: req.body.user_type });
   
-  User.find({ username: req.body.username }).then(function success(err, docs) 
+  User.find({ username: req.body.username }) .then(function success(docs, err) 
   {
     if(err)
     {
-      res.write(JSON.stringify({
+      debugger;
+      res.status(200).write(JSON.stringify({
         response_type: 'reject',
         response_msg: 'Duplicate Users in DB'
       }));
-    }
-    else
-    {
-      res.writeHead(200, {
-        'Content-Type': 'json' 
-      });
+
+      return;
     }
 
-    if(!docs)
+    res.set({
+      "Content-Type": "application/json"
+    });
+
+    if(docs.length == 0)
     {
       console.log('new user!');
       user.save();
@@ -46,6 +46,7 @@ router.post("/users", function(req, res) {
       res.write(JSON.stringify({
         response_type: 'accept'
       }));
+      res.end();
     }
     else if(docs.length == 1)
     {
@@ -61,13 +62,19 @@ router.post("/users", function(req, res) {
         response_msg: 'Duplicate Users in DB'
       }));
     }
-    res.end();
   },
   function error(err)
   {
+    debugger;
     console.log('Query error!');
     res.writeHead(500);
     res.end();
+  }).catch(function(exception) {
+    console.log(exception);
+    /*
+    res.writeHead(500);
+    res.end();
+    */
   });
 });
 

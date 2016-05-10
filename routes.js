@@ -1,11 +1,19 @@
 var express = require('express');
 var User = require('./models').User;
 var api_routes = require('./api/api');
+var Session = require("./Session");
+
+var bodyParser = require("body-parser");
 
 var router = express.Router();
 
+Session.CreateMemStore(router);
+
+router.use(bodyParser.json());
+router.use(bodyParser.urlencoded({ extended: true }));
+
 function auth_middleware(req, res, next) {
-  if(req.session)
+  if(req.session.username)
     return next();
 
   res.redirect("/login");
@@ -52,13 +60,16 @@ router.post('/login', function(req, res)
       {
         if(error)
         {
-          logger.log(error);
+          console.log(error);
           res.status(500).end();
+          res.end();
         }
-        else
+        else {
           res.status(200).send({
             success: true, 
           });
+          res.end();
+        }
       });
     }
     else if(data.length > 1)
@@ -76,8 +87,11 @@ router.post('/login', function(req, res)
   },
   function(err)
   {
-    logger.log('Mongo Error: '+err);
+    console.log('Mongo Error: '+err);
     res.status(500).end();
+  })
+  .catch(function(exception) {
+    console.log(exception);
   });
 });
 

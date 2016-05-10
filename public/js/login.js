@@ -9,7 +9,12 @@ $(function () {
       }
       else
       {
-        $.post('/login', $(this).serialize(), function(data)
+        json_data = {
+          username: $(this).find("input[type=email]").val(),
+          password: $(this).find("input[type=password]").val()
+        };
+
+        $.post('/login', json_data, function(data)
         {
           if(data.success == false)
           {
