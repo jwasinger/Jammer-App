@@ -14,6 +14,8 @@ $(function () {
           password: $(this).find("input[type=password]").val()
         };
 
+        alert("foo");
+
         $.post('/login', json_data, function(data)
         {
           if(data.success == false)
@@ -32,6 +34,7 @@ $(function () {
           }
           else
           {
+            document.cookie += "; username="+json_data.username;
             window.location = '/';
           }
         }).fail(function()

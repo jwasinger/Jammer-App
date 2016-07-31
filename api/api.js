@@ -99,10 +99,15 @@ router.post("/jams", function(req, res) {
 });
 
 router.get("/jams", function(req, res) {
-  debugger;
   if(req.query.title) {
     Jam.find({Title: req.query.title}).exec().then(function(docs) {
-      debugger;
+      res.json(docs[0]);
+    }, 
+    function(error) {
+      console.log(error);
+    });
+  } else if (req.query.username) {
+    Jam.find({Title: req.query.title}).exec().then(function(docs) {
       res.json(docs[0]);
     }, 
     function(error) {
@@ -122,22 +127,52 @@ router.get("/jams", function(req, res) {
 });
 
 router.post("/jams/join", function(req, res) {
-  if(req.query.title && req.query.instrument && req.query.username) {
-    Jam.find({Title: req.query.title}, function(err, docs) {
+  var body = req.body;
+  debugger;
+  if(body.title && body.instrument && body.username) {
+    Jam.update({'Title': body.title, 'Spots.Instrument': body.instrument}, {
+      '$set': {
+        'Spots.$.User': body.username
+      }
+    }, function(err) {
+      debugger;
+      if(err) {
+        console.log(err);
+        res.status(500).send();
+        return;
+      }
+
+      res.json({success: true});
+    });
+
+    /*
+    Jam.find({Title: body.title}, function(err, docs) {
       if(err) {
         console.log(err);
         return;
       }
 
+      debugger;
       var jam = docs[0];
-      for(var i = 0; i < jam.Spots; i++) {
-        if(jam.Spots[i].Instrument == req.query.instrument) {
+      for(var i = 0; i < jam.Spots.length; i++) {
+        if(jam.Spots[i].Instrument == body.instrument) {
+          debugger;
           if(jam.Spots[i].User == "") {
+            jam.Spots[i].User = body.username;
+            jam.save(function(err) {
+              if(err) {
+                console.log(err);
+                res.status(500).send();
+                return;
+              }
 
+              res.json({success: true});
+            });
           }
         }
       }
     })
+    */
   }
 });
 

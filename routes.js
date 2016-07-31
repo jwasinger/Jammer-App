@@ -69,6 +69,7 @@ router.post('/login', function(req, res)
           res.end();
         }
         else {
+          console.log("login success");
           res.status(200).send({
             success: true, 
           });
@@ -99,12 +100,40 @@ router.post('/login', function(req, res)
   });
 });
 
+router.get("/logout", function(req, res) {
+  req.session.destroy();
+  res.redirect("/");
+});
+
 router.get("/viewjam", function(req, res) {
   if(!req.query.title) {
     res.status(404).send();
   }
   
-  res.render("viewjam.html");
+  res.render("viewjam.html", {
+    "username": req.session.username
+  });
+});
+
+router.post("jams/join", function(req, res) {
+  var body = req.body;
+
+  if(body.title && body.instrument && body.username) {
+    debugger;
+    Jam.update({'Title': body.title, 'Spots.Instrument': body.instrument}, {
+      '$set': {
+        'Spots.$.User': body.username
+      }
+    }, function(err) {
+      if(err) {
+        console.log(err);
+        res.status(500).send();
+        return;
+      }
+
+      res.json({success: true});
+    });
+  }
 });
 
 module.exports = router;

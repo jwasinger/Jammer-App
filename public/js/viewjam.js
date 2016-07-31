@@ -9,6 +9,21 @@ function getParameterByName(name, url) {
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i = 0; i <ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length,c.length);
+        }
+    }
+    return "";
+}
+
 $(function() {
   $.ajax({
     dataType: "json", 
@@ -22,7 +37,7 @@ $(function() {
 
         spot_element.append("<div class='btn-container col-xs-6'></div>");
         if(data.Spots[i].User == "") {
-          spot_element.find("div.btn-container").append("<button class='btn btn-primary btn-sm'>Join</button>");
+          spot_element.find("div.btn-container").append("<button data-instrument='"+data.Spots[i].Instrument+"' data-jam-title='"+data.Title+"' class='join-btn btn btn-primary btn-sm'>Join</button>");
         } else {
           spot_element.find("div.btn-container").text(data.Spots[i].User);
         }
@@ -32,5 +47,19 @@ $(function() {
       $("span.datetime-value").text(data.Date);
       $("span.location-value").text(data.Location);
       $("p.description-value").text(data.Description);
+
+    $("button.join-btn").click(function(e) {
+      var json_data = {
+        username: window.username,
+        title: $(this).data("jam-title"),
+        instrument: $(this).data("instrument")
+      };
+
+      $.post('/api/jams/join', json_data, function(data) {
+        location.reload();
+      });
+    });
   });
+
+
 });
