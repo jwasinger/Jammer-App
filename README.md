@@ -3,7 +3,7 @@ Jammer is a mobile-oriented web application that allows users to create and join
 
 ## Installation 
 
-Note: this application requires an instance of MongoDB and an instance of Elasticsearch to be installed and available.
+Note: this application requires an instance of MongoDB to be installed and available.
 
 1. Clone the repo `git clone https://github.com/jwasinger/Jammer-App`
 2. Install NPM dependencies `npm install`
